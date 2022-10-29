@@ -31,6 +31,22 @@ _setEmployee = _contract.function("setEmployeeAccount");
 _empContractStatus = _contract.function("empContractStatus");
 ```
 
+
+```
+cd flutterapp
+```
+Install dependencies
+```
+flutter pub add web3dart
+flutter pub add http
+flutter pub add web_socket_channel
+```
+
+Run the app
+```
+flutter run --no-sound-null-safety
+```
+
 # Backend smart contract
 
 - [flutterdapp/contracts](https://github.com/degagawolde/Refund-by-Location-Smart-Contract/flutterdapp/contracts) - the smart contract written in [solidity](https://docs.soliditylang.org/en/v0.8.17/)
