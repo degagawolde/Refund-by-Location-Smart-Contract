@@ -8,6 +8,14 @@ The employee’s phone sends its GPS location to a smart contract at a certain i
 # Flutter Frontend mobile dApp 
 
 - [flutterdapp](https://github.com/degagawolde/Refund-by-Location-Smart-Contract/flutterdapp/)
+- The packages http, we3dart, web_socket_channel facilitate the linking between the frontend and the smart contract
+
+Create an endpoints for the smart contract deployed on [Ganache](https://trufflesuite.com/ganache/) local network.
+```
+    _client = Web3Client(_rpcURl, Client(), socketConnector: () {
+      return IOWebSocketChannel.connect(_wsURl).cast<String>();
+      });
+```
 
 # Backend smart contract
 

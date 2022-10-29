@@ -92,6 +92,8 @@ class parentModel extends ChangeNotifier {
             params: [address[i]]));
       }
       empStatusList = empStatus;
+    } else {
+      empStatusList = [];
     }
     // latitude = empStatus[0].toString();
     // longitude = empStatus[1].toString();
