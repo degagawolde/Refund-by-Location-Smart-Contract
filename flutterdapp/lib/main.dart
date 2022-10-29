@@ -5,13 +5,12 @@ import 'package:flutterdapp/parentModel.dart';
 import 'package:flutterdapp/childModel.dart';
 import 'package:provider/provider.dart';
 import 'package:flutterdapp/ChildPage.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 
 var password;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // ignore: deprecated_member_use
   FlutterNativeSplash.removeAfter(initialization);
   runApp(const MyApp());
 }

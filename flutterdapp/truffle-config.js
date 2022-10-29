@@ -65,12 +65,13 @@ module.exports = {
     // options below to some value.
     //
     development: {
-     host: "127.0.0.1",     // Localhost (default: none)
+     host: "192.168.1.5",     // Localhost (default: none)
      port: 7545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
 
-    //
+    contracts_build_directory: "./src/artifacts/",
+    
     // An additional network, but with some advanced options…
     // advanced: {
     //   port: 8777,             // Custom port
