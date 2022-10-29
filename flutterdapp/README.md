@@ -1,10 +1,15 @@
 # flutterdapp
 
-A new Flutter project.
+```
+flutter pub add web3dart
+flutter pub add http
+flutter pub add web_socket_channel
+```
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
+Run the app
+```
+flutter run --no-sound-null-safety
+```
 
 A few resources to get you started if this is your first Flutter project:
 
