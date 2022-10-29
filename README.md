@@ -33,7 +33,18 @@ _empContractStatus = _contract.function("empContractStatus");
 
 # Backend smart contract
 
-- [flutterdapp/contracts](https://github.com/degagawolde/Refund-by-Location-Smart-Contract/flutterdapp/contracts)
+- [flutterdapp/contracts](https://github.com/degagawolde/Refund-by-Location-Smart-Contract/flutterdapp/contracts) - the smart contract written in [solidity](https://docs.soliditylang.org/en/v0.8.17/)
+- The smart contract is devloped on [truffle](https://trufflesuite.com/docs/truffle/) which is a world class development environment, testing framework and asset pipeline for blockchains using the Ethereum Virtual Machine (EVM), aiming to make life as a developer easier.
+```
+module.exports = {
+    development: {
+     host: "192.168.1.5",     // Localhost (default: none)
+     port: 7545,            // Standard Ethereum port (default: none)
+     network_id: "*",       // Any network (default: none)
+    },
+
+contracts_build_directory: "./src/artifacts/",
+```
 
 # Build
 
