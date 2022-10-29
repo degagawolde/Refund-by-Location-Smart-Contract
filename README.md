@@ -31,9 +31,10 @@ _setEmployee = _contract.function("setEmployeeAccount");
 _empContractStatus = _contract.function("empContractStatus");
 ```
 
-
+## Installation 
 ```
-cd flutterapp
+git clone https://github.com/degagawolde/Refund-by-Location-Smart-Contract.git
+cd Refund-by-Location-Smart-Contract/flutterdapp
 ```
 Install dependencies
 ```
