@@ -12,9 +12,23 @@ The employee’s phone sends its GPS location to a smart contract at a certain i
 
 Create an endpoints for the smart contract deployed on [Ganache](https://trufflesuite.com/ganache/) local network.
 ```
-    _client = Web3Client(_rpcURl, Client(), socketConnector: () {
-      return IOWebSocketChannel.connect(_wsURl).cast<String>();
-      });
+final String _rpcURl = "http://192.168.1.5:7545";
+final String _wsURl = "ws://192.168.1.5:7545/";
+
+_client = Web3Client(_rpcURl, Client(), socketConnector: () {return IOWebSocketChannel.connect(_wsURl).cast<String>();});
+
+String abiStringFile = await rootBundle.loadString("src/artifacts/RefundContract.json");
+var jsonAbi = jsonDecode(abiStringFile);
+_abiCode = jsonEncode(jsonAbi["abi"]);
+
+_contractAddress = EthereumAddress.fromHex(jsonAbi["networks"]["5777"]["address"]);
+_credentials = EthPrivateKey.fromHex(_privateKey);
+
+_contract = await DeployedContract(ContractAbi.fromJson(_abiCode, "RefundContract"), _contractAddress);
+// Extracting the functions, declared in contract.
+_getEmployees = _contract.function("getEmployees");
+_setEmployee = _contract.function("setEmployeeAccount");
+_empContractStatus = _contract.function("empContractStatus");
 ```
 
 # Backend smart contract
