@@ -24,8 +24,12 @@ contract RefundContract {
     }
 
     modifier onlyEmployee(address _addr) {
-        require(msg.sender == _addr, "Only an employee has access to this function");
+
         bool exists = false;
+
+        if(msg.sender == _addr){
+            exists = true;
+        }
 
         for (uint256 i = 0; i < employees.length; i++) {
             if (employees[i] == _addr) {
@@ -34,7 +38,7 @@ contract RefundContract {
             }
         }
 
-        require(exists, "Only an  employee has access to this function");
+        require(exists, "Only an  employee has access to this function_2");
         _;
     }
     
@@ -45,7 +49,7 @@ contract RefundContract {
         _;
     }
 
-    function sqrt(int256 input) private pure returns (int256  output ) {
+    function getSqrt(int256 input) private pure returns (int256  output ) {
         int256 temp = (input + 1) / 2;
         output = input;
         while (temp < output) {
@@ -57,13 +61,10 @@ contract RefundContract {
     function calculateDistance(int8 _latitude, int8 _longitude) private view  returns (int256 dist) {
         int256 x = _latitude - empContractStatus[msg.sender].latitude;
         int256 y = _longitude - empContractStatus[msg.sender].longitude;
-        dist = sqrt(x**2 + y**2);
+        dist = getSqrt(x**2 + y**2);
         return dist;
     }
-    function updateCompCountStatus(
-        int8 _latitude, 
-        int8 _longitude
-        ) public {
+    function updateCompCountStatus(int8 _latitude, int8 _longitude) public {
             int256 dist = calculateDistance(_latitude, _longitude);
             if (dist < empContractStatus[msg.sender].maxRadius) {
                 empContractStatus[msg.sender].compCount = empContractStatus[msg.sender].compCount + 1;
@@ -71,7 +72,7 @@ contract RefundContract {
     }
 
     function payEmployee(address payable _to) public payable onlyEmployee(_to) {
-        require(empContractStatus[_to].compCount > empContractStatus[_to].reqAmount);
+        require(empContractStatus[_to].compCount > empContractStatus[_to].reqAmount,"The employee did not remain in compliance with all the agreements.");
         bool sent = _to.send(empContractStatus[_to].payment);
         require(sent, "Failed to send Ether");
     }
@@ -80,17 +81,17 @@ contract RefundContract {
     // only employer has access
     function setEmployeeAccount(
         address _empAddr,
-        int8 _cenLat,
-        int8 _cenLon,
-        int8 _radius,
+        int8 _latitude,
+        int8 _longitude,
+        int8 _maxRadius,
         uint8 _payAmount,
         uint8 _reqAmount
         // Should also set the duration the contract will be checking for
         ) public onlyEmployeer() {
             employees.push(_empAddr); // should delete if it is already in the list
-            empContractStatus[_empAddr].latitude = _cenLat;
-            empContractStatus[_empAddr].longitude = _cenLon;
-            empContractStatus[_empAddr].maxRadius = _radius;
+            empContractStatus[_empAddr].latitude = _latitude;
+            empContractStatus[_empAddr].longitude = _longitude;
+            empContractStatus[_empAddr].maxRadius = _maxRadius;
             empContractStatus[_empAddr].payment = _payAmount;
             empContractStatus[_empAddr].compCount = 0;
             empContractStatus[_empAddr].reqAmount = _reqAmount;
@@ -98,5 +99,8 @@ contract RefundContract {
 
     function getAdmin() public view returns(address) {
         return employeer;
+    }
+    function getEmployees() public view returns(address[] memory){
+        return employees;
     }
 }

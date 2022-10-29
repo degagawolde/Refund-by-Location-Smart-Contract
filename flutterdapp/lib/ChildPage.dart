@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -96,17 +97,15 @@ class _ChildPageState extends State<ChildPage> {
                 onChanged: (value) {
                   setState(() {
                     if (value) {
-// final LocationSettings locationSettings =
-// LocationSettings(
-// accuracy: LocationAccuracy.high,
-// distanceFilter: 100,
-// );
+                      // final LocationSettings locationSettings =
+                      // LocationSettings(
+                      // accuracy: LocationAccuracy.high,
+                      // distanceFilter: 100);
                       var geolocator = Geolocator();
                       var locationOptions = LocationOptions(
                         accuracy: LocationAccuracy.high,
                         distanceFilter: 100,
                       );
-// ignore: unused_local_variable
                       positionStream =
                           geolocator.getPositionStream(locationOptions).listen(
                         (Position position) {
@@ -115,6 +114,7 @@ class _ChildPageState extends State<ChildPage> {
                               print("Tracking On");
                               value = true;
                               isSwitched = true;
+                              // ignore: unnecessary_null_comparison
                               print(position == null
                                   ? 'Unknown'
                                   : position.latitude.toString() +
@@ -122,9 +122,9 @@ class _ChildPageState extends State<ChildPage> {
                                       position.longitude.toString());
                               lat_1 = position.latitude.toString();
                               lon_1 = position.longitude.toString();
-                              listModel.addCoordinates(
-                                lat_1,
-                                lon_1,
+                              listModel.updateCompCountStatus(
+                                lat_1.split(".")[0],
+                                lon_1.split(".")[0],
                               );
                               status = "Latitude: $lat_1\nLongitude: $lon_1";
                               locationMessage =
