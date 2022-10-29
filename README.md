@@ -47,7 +47,11 @@ contracts_build_directory: "./src/artifacts/",
 ```
 
 # Build
+- By running the truffle migrate, the smart contract artifact will be saved in './src/artifacts/' directory.
 
 # Test 
+- [flutterdapp/test/RefundContract.js](https://github.com/degagawolde/Refund-by-Location-Smart-Contract/blob/main/flutterdapp/test/RefundContract.js)
 
 # Deploy
+- The smart contract is deployed on [Ganache](https://trufflesuite.com/ganache/) 
+- [Ganache](https://trufflesuite.com/ganache/)  is a personal blockchain for rapid Ethereum dApp
