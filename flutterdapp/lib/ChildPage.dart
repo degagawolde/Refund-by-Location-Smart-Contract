@@ -30,6 +30,64 @@ class _ChildPageState extends State<ChildPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Employee Location"),
+        actions: [
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "4",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Color.fromARGB(255, 243, 205, 33),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "100",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: IconButton(
+                  onPressed: () {
+                    listModel.getContractStatus("");
+                    showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Show Status'),
+                        content: Container(
+                          height: 120,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Comliance Count: 4"),
+                              Text("Balance: 100 ETH"),
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.view_agenda_sharp),
+                ),
+              )
+            ],
+          ),
+        ],
       ),
       body: Center(
         child: Column(

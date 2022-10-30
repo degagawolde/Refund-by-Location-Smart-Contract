@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.13;
 
+
 contract RefundContract {
+
     address[] public employees;
     address public employeer;
 
@@ -72,13 +74,13 @@ contract RefundContract {
     }
 
     function payEmployee(address payable _to) public payable onlyEmployee(_to) {
-        require(empContractStatus[_to].compCount > empContractStatus[_to].reqAmount,"The employee did not remain in compliance with all the agreements.");
+        require(empContractStatus[_to].compCount > empContractStatus[_to].reqAmount,
+        "The employee did not remain in compliance with all the agreements.");
         bool sent = _to.send(empContractStatus[_to].payment);
         require(sent, "Failed to send Ether");
     }
 
-        ///////////////////////////////////////////////////////////////
-    // only employer has access
+    //////////////////////only employer has access////////////////////////////////// 
     function setEmployeeAccount(
         address _empAddr,
         int8 _latitude,

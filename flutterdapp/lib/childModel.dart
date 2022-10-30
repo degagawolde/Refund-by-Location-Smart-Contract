@@ -23,7 +23,10 @@ class childModel extends ChangeNotifier {
   late String y;
   late String latitude;
   late String longitude;
+  late List empStatus;
+  late String balance;
   late ContractFunction _updateCompCountStatus;
+  late ContractFunction _empContractStatus;
   childModel() {
     initiateSetup();
   }
@@ -69,6 +72,23 @@ class childModel extends ChangeNotifier {
     // Extracting the functions, declared in contract.
 
     _updateCompCountStatus = _contract.function('updateCompCountStatus');
+    _empContractStatus = _contract.function('empContractStatus');
+  }
+
+  getBalance(String address) async {
+    EtherAmount etherAmount =
+        await _client.getBalance(EthereumAddress.fromHex(address));
+    balance = '${etherAmount.getValueInUnit(EtherUnit.ether)} Eth';
+  }
+
+  getContractStatus(String address) async {
+    initiateSetup();
+
+    empStatus = await _client.call(
+        contract: _contract,
+        function: _empContractStatus,
+        params: [EthereumAddress.fromHex(address)]);
+    print(empStatus);
   }
 
   updateCompCountStatus(String latitude, String longitude) async {
@@ -86,28 +106,3 @@ class childModel extends ChangeNotifier {
     notifyListeners();
   }
 }
-  // getCoordinates() async {
-  //   List readCoordinates = await _client
-  //       .call(contract: _contract, function: _readCoordinates, params: []);
-  //   x = readCoordinates[0];
-  //   y = readCoordinates[1];
-
-  // addCoordinates(String lat, String lon) async {
-  //   latitude = EncryptionDecryption.encryptAES(lat);
-  //   longitude = EncryptionDecryption.encryptAES(lon);
-  //   await _client.sendTransaction(
-  //     _credentials,
-  //     Transaction.callContract(
-  //       contract: _contract,
-  //       function: _sendCoordinates,
-  //       parameters: [latitude, longitude],
-  //       maxGas: 100000,
-  //     ),
-  //     chainId: 4,
-  //   );
-
-  //   getCoordinates();
-  //   isLoading = false;
-  //   notifyListeners();
-  // }
-
